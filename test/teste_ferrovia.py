@@ -2,8 +2,8 @@ from gpiozero import LED
 
 def setup():
     size(666,400)
-    global bg, b1, b2, b3, b4, R, L, Dir, Go #Para poder chmar no draw
-    #bg = load_shape("painel.svg")
+    global bg, b1, b2, b3, b4, L, R #Para poder chmar no draw
+    bg = load_shape("painel.svg")
 
     b1 = Botao_toggle(115,5,60,60,"1",4)
     b2 = Botao_toggle(10,120,60,60,"2",17)
@@ -15,7 +15,7 @@ def setup():
 
 def draw():
     background(255)
-    #shape(bg,0,0)
+    shape(bg,0,0)
     b1.display()
     b2.display()
     b3.display()
@@ -23,30 +23,28 @@ def draw():
     L.display()
     R.display()
     
-    if L.pressed:
-        Dir.on()
-        Go.on()
-        print("L")
-        
-    elif R.pressed:
-        Dir.off()
-        Go.on()
-        print("R")
-    
-    else:
-        Go.off()
     
 def mouse_pressed():
     print (mouse_x,mouse_y)
 
 class Botao_push():
-    ''' Button with only pressed option'''
-    def __init__(self, x, y, w, h, t):
+    '''Button with only pressed option'''
+    def __init__(self, x, y, w, h, t, pin):
         self.x, self.y = x, y
         self.w, self.h = w, h
         self.t = t
         self.pressed = False
+        self.led = LED(pin)
+        self.led.off()
 
+    def on(self):
+        self.led.on()
+        self.state = True
+    
+    def off(self):
+        self.led.off()
+        self.state = False
+    
     def mouse_over(self):
         return (self.x < mouse_x < self.x + self.w and
                 self.y < mouse_y < self.y + self.h)
@@ -69,11 +67,14 @@ class Botao_push():
 
         if mouse_over and self.pressed and not is_mouse_pressed:
             self.pressed = False
+            self.off()
             return True
         if mouse_over and is_mouse_pressed:
             self.pressed = True
+            self.on()
         else:
             self.pressed = False
+            self.off()
             
         return False
     
@@ -87,7 +88,7 @@ class Botao_toggle():
         self.state = False
         self.led = LED(pin)
         self.led.off()
-    '''
+
     def on(self):
         self.led.on()
         self.state = True
@@ -95,7 +96,7 @@ class Botao_toggle():
     def off(self):
         self.led.off()
         self.state = False
-    '''
+
 
     def mouse_over(self):
         return (self.x < mouse_x < self.x + self.w and
@@ -128,8 +129,3 @@ class Botao_toggle():
             
         return False
 
-
-
-
-
-run_sketch()
