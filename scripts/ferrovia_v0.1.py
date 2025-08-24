@@ -3,7 +3,7 @@ from gpiozero import LED
 def setup():
     size(666,400)
     global bg, b1, b2, b3, b4, L, R #Para poder chmar no draw
-    bg = load_shape("painel.svg")
+    bg = load_shape("../painel.svg")
 
     b1 = Botao_toggle(115,5,60,60,"1",4)
     b2 = Botao_toggle(10,120,60,60,"2",17)
@@ -25,7 +25,8 @@ def draw():
     
     
 def mouse_pressed():
-    print (mouse_x,mouse_y)
+    #print (mouse_x,mouse_y)
+    pass
 
 class Botao_push():
     '''Button with only pressed option'''
