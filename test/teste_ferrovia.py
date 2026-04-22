@@ -2,6 +2,8 @@ from gpiozero import LED
 
 def setup():
     size(666,400)
+    frame_rate(15)
+    
     global bg, b1, b2, b3, b4, L, R #Para poder chmar no draw
     bg = load_shape("../painel.svg")
 
@@ -11,6 +13,11 @@ def setup():
     b4 = Botao_toggle(460,93,60,60,"4",22)
     L = Botao_push(520,325,60,60,"←",23)
     R = Botao_push(590,325,60,60,"→",24)
+    
+    b1.on()
+    b2.on()
+    b3.on()
+    b4.on()
 
 
 def draw():
@@ -23,11 +30,26 @@ def draw():
     L.display()
     R.display()
     
+    # TECLADO
+    if is_key_pressed:
+        if key_code == LEFT:
+            L.on()
+            L.pressed = True
+        elif key_code == RIGHT:
+            R.on()
+            R.pressed = True
+
     
 def mouse_pressed():
     #print (mouse_x,mouse_y)
     pass
 
+def key_released():
+    L.off()
+    L.pressed = False
+    R.off()
+    R.pressed = False
+    
 class Botao_push():
     '''Button with only pressed option'''
     def __init__(self, x, y, w, h, t, pin):
@@ -40,11 +62,9 @@ class Botao_push():
 
     def on(self):
         self.led.on()
-        self.state = True
     
     def off(self):
         self.led.off()
-        self.state = False
     
     def mouse_over(self):
         return (self.x < mouse_x < self.x + self.w and
@@ -70,7 +90,7 @@ class Botao_push():
             self.pressed = False
             self.off()
             return True
-        if mouse_over and is_mouse_pressed:
+        elif mouse_over and is_mouse_pressed or self.pressed:
             self.pressed = True
             self.on()
         else:
