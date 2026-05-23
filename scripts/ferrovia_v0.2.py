@@ -1,22 +1,12 @@
+#Thonny py5 imported mode
+
 
 from gpiozero import Device
 from gpiozero import LED
 from gpiozero import Servo
 
-try:
-    # Tenta usar a biblioteca padrão do Raspberry Pi
-    import RPi.GPIO
-    from gpiozero.pins.pigpio import PiGPIOFactory
-    servoFactory = PiGPIOFactory()
-    
-except ImportError:
-    # Se falhar (computador comum), força o uso dos pinos simulados
-    from gpiozero.pins.mock import MockFactory
-    from gpiozero.pins.mock import MockPWMPin
-    Device.pin_factory = MockFactory()
-    servoFactory = MockFactory(pin_class=MockPWMPin)
-    print("Modo de simulação ativado.")
-
+from gpiozero.pins.pigpio import PiGPIOFactory
+servoFactory = PiGPIOFactory()
 
 
 
@@ -33,11 +23,11 @@ def setup():
     b3 = Botao_toggle(37,252,60,60,"3",27)  # Pino 27
     b4 = Botao_toggle(460,93,60,60,"4",22)  # Pino 22
     
-    s1 = Botao_toggle_servo(410,133,40,40,"s1",13,0,0.8)  # Servo pino 13
-    s2 = Botao_toggle_servo(520,50,40,40,"s2",19,0,0.8)  # Servo pino 19
+    s1 = Botao_toggle_servo(410,133,40,40,"s1",13,0,-0.7)  # Servo pino 13
+    s2 = Botao_toggle_servo(520,50,40,40,"s2",19,0,-0.8)  # Servo pino 19
     
-    L = Botao_push(520,325,60,60,"←",23)
-    R = Botao_push(590,325,60,60,"→",24)
+    L = Botao_push(520,325,60,60,"←",3)
+    R = Botao_push(590,325,60,60,"→",2)
     
     b1.on()
     b2.on()

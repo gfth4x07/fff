@@ -1,3 +1,5 @@
+# Thonny py5 imported mode
+
 from gpiozero import LED
 
 def setup():
