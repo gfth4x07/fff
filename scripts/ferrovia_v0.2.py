@@ -56,8 +56,18 @@ def draw():
         elif key_code == RIGHT:
             R.on()
             R.pressed = True
-        elif key_code == "1":
-            b1.toggle()
+        elif key == "1":
+            b1.off() if b1.state else b1.off
+        elif key == "2":
+            b2.off() if b2.state else b1.off
+        elif key == "3":
+            b3.off() if b3.state else b1.off
+        elif key == "4":
+            b4.off() if b4.state else b1.off
+        elif key in {"z","Z"}:
+            s1.off() if s1.state else b1.off
+        elif key in {"x","X"}:
+            s2.off() if s2.state else b1.off
 
     
 def mouse_pressed():
