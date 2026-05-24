@@ -62,16 +62,28 @@ def draw():
             R.on()
             R.pressed = True
         elif key == "1":
+            while is_key_pressed:
+                pass
             b1.off() if b1.state else b1.on()
         elif key == "2":
+            while is_key_pressed:
+                pass
             b2.off() if b2.state else b2.on()
         elif key == "3":
+            while is_key_pressed:
+                pass
             b3.off() if b3.state else b3.on()
         elif key == "4":
+            while is_key_pressed:
+                pass
             b4.off() if b4.state else b4.on()
         elif key in {"z", "Z"}:
+            while is_key_pressed:
+                pass
             s1.off() if s1.state else s1.on()
         elif key in {"x", "X"}:
+            while is_key_pressed:
+                pass
             s2.off() if s2.state else s2.on()
 
 
