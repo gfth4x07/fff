@@ -1,3 +1,9 @@
+# PY5 IMPORTED MODE CODE
+#  Script para ser usado no Thonny em Imported mode for py5
+#
+#  Teste para usar o py5 junto com gpiozero
+#    Quando apertar o botão do mouse o led acende
+
 from gpiozero import LED
 from time import sleep
 

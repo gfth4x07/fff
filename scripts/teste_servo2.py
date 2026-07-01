@@ -1,3 +1,5 @@
+# Teste dos servos agora com 2 servos
+
 from gpiozero import Servo
 from gpiozero.pins.pigpio import PiGPIOFactory
 from time import sleep

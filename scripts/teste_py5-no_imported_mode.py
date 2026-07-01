@@ -1,3 +1,5 @@
+# Tese sem imported mode
+
 import py5
 def setup():
     py5.size(200,200)

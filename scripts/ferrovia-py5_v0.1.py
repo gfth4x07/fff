@@ -1,4 +1,5 @@
-# Thonny py5 imported mode
+# PY5 IMPORTED MODE CODE
+#  Script para ser usado no Thonny em Imported mode for py5
 
 from gpiozero import LED
 
