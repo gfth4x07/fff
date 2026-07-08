@@ -43,8 +43,8 @@ def __main__():
     Segmento3 = Segmento('e',27)
     Segmento4 = Segmento('r',22)
     
-    Desvio1 = Desvio('a', 13, 0, -0.7,)
-    Desvio2 = Desvio_led('s', 19, 0, -0.8, 16, 20, 21)
+    Desvio1 = Desvio('a', 13, 0, -0.75,)
+    Desvio2 = Desvio_led('s', 19, 0, -0.9, 16, 20, 21)
     
     
 
