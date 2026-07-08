@@ -36,37 +36,27 @@ def __main__():
     print(f"Rodando em: {'Raspberry Pi' if ON_PI else 'PC (modo mock)'}")
     print(comandos)
 
-    Segmento1 = Segmento('Q',4)
-    Segmento2 = Segmento('W',17)
-    Segmento3 = Segmento('E',27)
-    Segmento4 = Segmento('R',22)
+    Trem1 = Trem(3,2)
+
+    Segmento1 = Segmento('q',4)
+    Segmento2 = Segmento('w',17)
+    Segmento3 = Segmento('e',27)
+    Segmento4 = Segmento('r',22)
     
-    Desvio1 = Desvio('A', 13, 0, -0.7,)
-    Desvio2 = Desvio_led('S', 19, 0, -0.8, 1, 2, 3)
-      #def __init__(self, key, servo_pin, angle_on, angle_off, led_r, led_g,led_b):
+    Desvio1 = Desvio('a', 13, 0, -0.7,)
+    Desvio2 = Desvio_led('s', 19, 0, -0.8, 16, 20, 21)
+    
+    
+
     while True: 
-        #Andar é prioridade entre mudar segmento e desvios
-        if  keyboard.is_pressed('l'):
-            #Go Right
-            print('Direita')
-            while keyboard.is_pressed('l'):
-                sleep(0.01)
-            print("Soltou")
-        elif keyboard.is_pressed('k'):
-            #Go Left
-            print('Esquerda')
-            while keyboard.is_pressed('k'):
-                sleep(0.01)
-            print("Soltou")
-            
-        # Se não estiver andando: liga os segmentos ou troca desvios
-        else:
-            Segmento1.verificar()
-            Segmento2.verificar()
-            Segmento3.verificar()
-            Segmento4.verificar()
-            Desvio1.verificar()
-            Desvio2.verificar()
+
+        Trem1.verificar()
+        Segmento1.verificar()
+        Segmento2.verificar()
+        Segmento3.verificar()
+        Segmento4.verificar()
+        Desvio1.verificar()
+        Desvio2.verificar()
             
             
         if  keyboard.is_pressed('space'):
@@ -79,7 +69,28 @@ def __main__():
             #Desligar ou voltar pra posição original
             break
 
-
+class Trem:
+    def __init__(self, pin_l, pin_r):
+        self.left = LED(pin_l)
+        self.right = LED(pin_r)
+        self.left.off()
+        self.right.off()
+        
+    def verificar(self):
+        if  keyboard.is_pressed('l'):
+            self.right.on()
+            print('Direita')
+            while keyboard.is_pressed('l'):
+                sleep(0.01)
+            print("Soltou")
+            self.right.off()
+        elif keyboard.is_pressed('k'):
+            self.left.on()
+            print('Esquerda')
+            while keyboard.is_pressed('k'):
+                sleep(0.01)
+            print("Soltou")
+            self.left.off()
 
 
 
