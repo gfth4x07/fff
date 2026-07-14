@@ -52,8 +52,7 @@ def __main__():
     
     modo_automatico = False
     
-    auto1 = Auto('z',Trem1)
-    
+   
     while True: 
 
         Trem1.verificar()
@@ -64,7 +63,24 @@ def __main__():
         Desvio1.verificar()
         Desvio2.verificar()
         
-        auto1.verificar()
+        if  keyboard.is_pressed('z'):  # Faz o trem ir do Sensor 1 ao Sensor2
+            modo_automatico = True
+            print("Automode on: z")
+            
+            if Sensor1.is_pressed and not Sensor2.is_pressed:
+                # TODO: Também fazer a checagem dos desvios.
+                print("Trem em posição")
+                Trem1.go_right()
+                Sensor2.wait_for_press()
+                Trem1.stop()
+                print("Chegou ao destino")
+            else:
+                print("Trem fora de posição")
+                
+            while keyboard.is_pressed('z'):
+                sleep(0.01)
+            modo_automatico = False
+            print("Automode off: z")
         
         if  keyboard.is_pressed('space'):
             #Exits
@@ -203,34 +219,5 @@ class Desvio_led(Desvio, Led_rgb):
        Desvio.off(self)
        Led_rgb.red(self)
 
-
-class Auto:
-    def __init__(self, key, trem)
-        self.Trem = trem
-        self.key = key
-        
-    def verificar(self):
-        if  keyboard.is_pressed(self.key):
-            print("Automode on",self.key)
-            self.do()
-            while keyboard.is_pressed(self.key):
-                sleep(0.01)
-            print("Automode off",self.key)
-            
-    def do(self):
-        global modo_automatico = True
-        
-        if Sensor1.is_pressed and not Sensor2.is_pressed:
-            #Também fazer a checagem dos desvios.
-            print("Trem em posição")
-            self.Trem.go_right()
-            Sensor2.wait_for_press()
-            self.Trem.stop()
-            print("Chegou ao destino")
-        else:
-            print("Trem fora de posição")
-
-        global modo_automatico = False
-            
 
 __main__()
