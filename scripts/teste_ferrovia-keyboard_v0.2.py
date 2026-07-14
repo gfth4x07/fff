@@ -11,12 +11,13 @@ comandos = '''#  Controle pelo teclado
 #  A Ativa o desvio do fundo
 #  S Ativa o desvio da frente
 #
+#  Z Ativa o trem ir e depois voltar (TODO)
 #
 #  Espaço para sair'''
 
 import keyboard
 from time import sleep
-from gpiozero import Device, LED, Servo
+from gpiozero import Device, LED, Servo, Button
 
 
 try:
@@ -46,6 +47,13 @@ def __main__():
     Desvio1 = Desvio('a', 13, 0, -0.75,)
     Desvio2 = Desvio_led('s', 19, 0, -0.9, 16, 20, 21)
     
+    Sensor1 = Button(5, pull_up = None, active_state = True)
+    Sensor2 = Button(6, pull_up = None, active_state = True)
+    
+    modo_automatico = False
+    
+    auto1 = Auto('z',Trem1)
+    
     while True: 
 
         Trem1.verificar()
@@ -55,6 +63,9 @@ def __main__():
         Segmento4.verificar()
         Desvio1.verificar()
         Desvio2.verificar()
+        
+        auto1.verificar()
+        
         if  keyboard.is_pressed('space'):
             #Exits
             print('exit')
@@ -71,23 +82,34 @@ class Trem:
         self.right = LED(pin_r)
         self.left.off()
         self.right.off()
-        
+
+    def go_right(self):
+        self.left.off()
+        self.right.on()
+
+    def go_left(self):
+        self.right.off()
+        self.left.on()
+
+    def stop(self):
+        self.left.off()
+        self.right.off()
+
     def verificar(self):
         if  keyboard.is_pressed('l'):
-            self.right.on()
+            self.go_right()
             print('Direita')
             while keyboard.is_pressed('l'):
                 sleep(0.01)
             print("Soltou")
-            self.right.off()
+            self.stop()
         elif keyboard.is_pressed('k'):
-            self.left.on()
+            self.go_left()
             print('Esquerda')
             while keyboard.is_pressed('k'):
                 sleep(0.01)
             print("Soltou")
-            self.left.off()
-
+            self.stop()
 
 
 class Segmento:
@@ -181,5 +203,34 @@ class Desvio_led(Desvio, Led_rgb):
        Desvio.off(self)
        Led_rgb.red(self)
 
+
+class Auto:
+    def __init__(self, key, trem)
+        self.Trem = trem
+        self.key = key
+        
+    def verificar(self):
+        if  keyboard.is_pressed(self.key):
+            print("Automode on",self.key)
+            self.do()
+            while keyboard.is_pressed(self.key):
+                sleep(0.01)
+            print("Automode off",self.key)
+            
+    def do(self):
+        global modo_automatico = True
+        
+        if Sensor1.is_pressed and not Sensor2.is_pressed:
+            #Também fazer a checagem dos desvios.
+            print("Trem em posição")
+            self.Trem.go_right()
+            Sensor2.wait_for_press()
+            self.Trem.stop()
+            print("Chegou ao destino")
+        else:
+            print("Trem fora de posição")
+
+        global modo_automatico = False
+            
 
 __main__()
