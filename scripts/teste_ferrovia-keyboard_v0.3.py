@@ -47,8 +47,8 @@ def __main__():
 
     Desvio1 = Desvio_led('a', 13, 0, -0.75, 11, 9, 10)
     Desvio2 = Desvio_led('s', 19, 0, -0.9, 16, 20, 21)
-    
-    Sensor1 = Button(0, pull_up = None, active_state = True)
+
+    Sensor1 = Button(25, pull_up = None, active_state = True)
     Sensor2 = Button(5, pull_up = None, active_state = True)
     Sensor3 = Button(6, pull_up = None, active_state = True)
     Sensor4 = Button(26, pull_up = None, active_state = True)
@@ -75,7 +75,7 @@ def __main__():
                 # TODO: Também fazer a checagem dos desvios.
                 print("Trem em posição")
                 Trem1.go_right()
-                Sensor2.wait_for_press()
+                Sensor4.wait_for_press()
                 Trem1.stop()
                 print("Chegou ao destino")
             else:
@@ -92,7 +92,9 @@ def __main__():
             print("Sensor 2: ",Sensor2.value)
             print("Sensor 3: ",Sensor3.value)
             print("Sensor 4: ",Sensor4.value)
-        
+            while keyboard.is_pressed('x'):
+                sleep(0.01)
+
         #Encerra a execução
         if  keyboard.is_pressed('space'):
             print('exit')
