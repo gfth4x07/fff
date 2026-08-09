@@ -45,8 +45,8 @@ def __main__():
     Segmento3 = Segmento('e',17)
     Segmento4 = Segmento('r',22)
 
-    Desvio1 = Desvio_led('a', 13, 0, -0.75, 11, 9, 10)
-    Desvio2 = Desvio_led('s', 19, 0, -0.9, 16, 20, 21)
+    Desvio1 = Desvio_led('a', 13, 0, -0.75, 16, 20, 21)
+    Desvio2 = Desvio_led('s', 19, 0, -0.9, 11, 9, 10)
 
     Sensor1 = Button(25, pull_up = None, active_state = True)
     Sensor2 = Button(5, pull_up = None, active_state = True)
@@ -132,8 +132,12 @@ class Trem:
     def verificar(self):
         if  keyboard.is_pressed('l'):
             if self.ends_R:
-                self.go_right()
-                print('Direita')
+                for s in self.ends_R:
+                        if s.value == True:
+                            break
+                else:
+                    self.go_right()
+                    print('Direita')
                 sensor = True
                 while keyboard.is_pressed('l') and sensor:
                     for s in self.ends_R:
@@ -149,15 +153,13 @@ class Trem:
                 print("Soltou")
                 self.stop()
         elif keyboard.is_pressed('k'):
-            if self.ends_L:
-                pass
-            else:                    
-                self.go_left()
-                print('Esquerda')
-                while keyboard.is_pressed('k'):
-                    sleep(0.01)
-                print("Soltou")
-                self.stop()
+                    
+            self.go_left()
+            print('Esquerda')
+            while keyboard.is_pressed('k'):
+                sleep(0.01)
+            print("Soltou")
+            self.stop()
     
     
 
