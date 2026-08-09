@@ -153,13 +153,27 @@ class Trem:
                 print("Soltou")
                 self.stop()
         elif keyboard.is_pressed('k'):
-                    
-            self.go_left()
-            print('Esquerda')
-            while keyboard.is_pressed('k'):
-                sleep(0.01)
-            print("Soltou")
-            self.stop()
+            if self.ends_L:
+                for s in self.ends_L:
+                        if s.value == True:
+                            break
+                else:
+                    self.go_left()
+                    print('Esquerda')
+                sensor = True
+                while keyboard.is_pressed('k') and sensor:
+                    for s in self.ends_L:
+                        if s.value == True:
+                            sensor = False
+                print("Soltou" if sensor else "Sensor")
+                self.stop()
+            else:
+                self.go_left()
+                print('Esquerda')
+                while keyboard.is_pressed('k'):
+                    sleep(0.01)
+                print("Soltou")
+                self.stop()
     
     
 
