@@ -40,10 +40,10 @@ def __main__():
 
     Trem1 = Trem(3,2)
 
-    Segmento1 = Segmento('q',4)
+    Segmento1 = Segmento('q',17)
     Segmento2 = Segmento('w',27)
-    Segmento3 = Segmento('e',17)
-    Segmento4 = Segmento('r',22)
+    Segmento3 = Segmento('e',22)
+    Segmento4 = Segmento('r',4)
 
     Desvio1 = Desvio_led('a', 13, 0, -0.75, 16, 20, 21)
     Desvio2 = Desvio_led('s', 19, 0, -0.9, 11, 9, 10)
