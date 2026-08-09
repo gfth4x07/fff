@@ -53,7 +53,7 @@ def __main__():
     Sensor3 = Button(6, pull_up = None, active_state = True)
     Sensor4 = Button(26, pull_up = None, active_state = True)
     
-    Trem1.ends_L.append(Sensor1, Sensor2, Sensor3)  # Sensores fim de curso
+    Trem1.ends_L.extend([Sensor1, Sensor2, Sensor3])  # Sensores fim de curso
     Trem1.ends_R.append(Sensor4)
     
     modo_automatico = False
@@ -131,13 +131,13 @@ class Trem:
 
     def verificar(self):
         if  keyboard.is_pressed('l'):
-            if self.end_R:
+            if self.ends_R:
                 self.go_right()
                 print('Direita')
                 sensor = True
                 while keyboard.is_pressed('l') and sensor:
-                    for s in self.end_R
-                        if s.state = True:
+                    for s in self.ends_R:
+                        if s.value == True:
                             sensor = False
                 print("Soltou" if sensor else "Sensor")
                 self.stop()
@@ -149,7 +149,7 @@ class Trem:
                 print("Soltou")
                 self.stop()
         elif keyboard.is_pressed('k'):
-            if self.end_L:
+            if self.ends_L:
                 pass
             else:                    
                 self.go_left()
