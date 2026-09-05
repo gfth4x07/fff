@@ -18,6 +18,8 @@ comandos = '''#  Controle pelo teclado
 
 import keyboard
 import termios  # To clear the whe call input()
+import sys  # The same
+
 from time import sleep
 from gpiozero import Device, LED, Servo, Button
 
