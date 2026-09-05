@@ -298,11 +298,11 @@ class Led_rgb:
 class Desvio:
     def __init__(self, key, servo_pin, angle_on, angle_off):
         self.key = key
-        self.state = False
+        self.state = True
         self.value_off = float(angle_off)
         self.value_on = float(angle_on)
         self.servo = Servo(servo_pin, pin_factory=servoFactory)
-        self.servo.value = self.value_off
+        self.servo.value = self.value_on
         
     def on(self):
         self.state = True
@@ -331,7 +331,7 @@ class Desvio_led(Desvio, Led_rgb):
     def __init__(self, key, servo_pin, angle_on, angle_off, led_r, led_g, led_b):
         Led_rgb.__init__(self, led_r, led_g, led_b)
         Desvio.__init__(self, key, servo_pin, angle_on, angle_off)
-        self.red()
+        self.green()
     
     def on(self):
         Desvio.on(self)
