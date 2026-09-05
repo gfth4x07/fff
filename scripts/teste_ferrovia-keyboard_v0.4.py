@@ -106,6 +106,7 @@ def __main__():
         #Depende da lógica do traçado
         if keyboard.is_pressed('c'):
             termios.tcflush(sys.stdin, termios.TCIFLUSH)
+            print("")
             fr = int(input("Sensor inicial (1,2,3 ou 4):"))
             to = int(input("Sensor final (1,2,3 ou 4):"))
             d = {1:Sensor1,
