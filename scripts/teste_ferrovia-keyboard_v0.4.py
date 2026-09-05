@@ -119,9 +119,9 @@ def __main__():
                 go_to(d[fr],d[to],Trem1,direction)
             else:
                 route({fr,4},Desvio1,Desvio2)
-                go_to(d[fr],4,Trem1,'R')
+                go_to(d[fr],d[4],Trem1,'R')
                 route({4,to},Desvio1,Desvio2)
-                go_to(4,d[to],Trem1,'L')
+                go_to(d[4],d[to],Trem1,'L')
 
 
         
