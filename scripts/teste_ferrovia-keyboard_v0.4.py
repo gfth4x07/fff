@@ -100,6 +100,7 @@ def __main__():
 
         #Encerra a execução
         if  keyboard.is_pressed('space'):
+            go_to(Sensor4,Sensor1,Trem1,"L")
             print('exit')
             Segmento1.off()
             Segmento2.off()
@@ -246,6 +247,11 @@ class Led_rgb:
         self.led_r.off()
         self.led_g.on()
         self.led_b.off()
+        
+    def blue(self):
+        self.led_r.off()
+        self.led_g.off()
+        self.led_b.on()
 
 
 class Desvio:
