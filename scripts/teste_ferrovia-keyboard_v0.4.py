@@ -115,20 +115,17 @@ def __main__():
             s = {fr,to}
             if 4 in s:
                 direction = 'R' if fr<to else 'L'
-                if 1 in s:
-                    Desvio2.off()
-                else:
-                    Desvio2.on()
-                    if 2 in s:
-                        Desvio1.off()
-                    else:
-                        Desvio1.on()
+                route(s,Desvio1,Desvio2)
                 go_to(d[fr],d[to],Trem1,direction)
+            else:
+                route({fr,4},Desvio1,Desvio2)
+                go_to(d[fr],4,Trem1,'R')
+                route({4,to},Desvio1,Desvio2)
+                go_to(4,d[to],Trem1,'L')
 
 
-                
-                
-            
+        
+
         #Encerra a execução
         if  keyboard.is_pressed('space'):
             print('exit')
@@ -138,7 +135,21 @@ def __main__():
             Segmento4.off()
             #Desligar ou voltar pra posição original
             break
-   
+def route(s,desvio1,desvio2):
+    '''mexe com os desvios'''
+    #Depende da lógica do traçado
+    if 4 in s:
+        if 1 in s:
+            desvio2.off()
+        else:
+            desvio2.on()
+            if 2 in s:
+                desvio1.off()
+            else:
+                desvio1.on()
+    else:
+        return "sem rota disponivel"
+
 def go_to(sensor_from, sensor_to, trem, direction):
     '''sai do sensor_from e vai para o sensor_to, direction must be "R" or "L" '''
     #TODO:
