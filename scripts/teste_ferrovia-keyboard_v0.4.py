@@ -97,10 +97,34 @@ def __main__():
             print("Sensor 4: ",Sensor4.value)
             while keyboard.is_pressed('x'):
                 sleep(0.01)
+        
+        #PERGUNTA DE ONDE SAI E PRA ONDE VAI
+        #Depende da lógica do traçado
+        if keyboard.is_pressed('c'):
+            fr = int(input("Sensor inicial (1,2,3 ou 4):"))
+            to = int(input("Sensor inicial (1,2,3 ou 4):"))
+            d = {1:Sensor1,
+                 2:Sensor2,
+                 3:Sensor3,
+                 4:Sensor4}
+            s = {fr,to}
+            if 4 in s:
+                direction = 'R' if fr<to else 'L'
+                if 1 in s:
+                    Desvio2.off()
+                else:
+                    Desvio2.on()
+                    if 2 in s:
+                        Desvio1.off()
+                    else:
+                        Desvio2.on()
+                go_to(d[fr],d[to],Trem1,direction)
 
+                
+                
+            
         #Encerra a execução
         if  keyboard.is_pressed('space'):
-            go_to(Sensor4,Sensor1,Trem1,"L")
             print('exit')
             Segmento1.off()
             Segmento2.off()
@@ -108,8 +132,7 @@ def __main__():
             Segmento4.off()
             #Desligar ou voltar pra posição original
             break
-
-## TESTAR ESSA FUNÇÃO
+   
 def go_to(sensor_from, sensor_to, trem, direction):
     '''sai do sensor_from e vai para o sensor_to, direction must be "R" or "L" '''
     #TODO:
