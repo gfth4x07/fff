@@ -119,18 +119,20 @@ def go_to(sensor_from, sensor_to, trem, direction):
     
     modo_automatico = True
     if sensor_from.is_pressed and not sensor_to.is_pressed:
-                print("Trem em posição")
-                if direction == 'R':
-                    trem.go_right()
-                elif direction == 'L':
-                    trem.go_left()
-                sensor_to.wait_for_press()
-                trem.stop()
-                print("Chegou ao destino")
-            else:
-                print("Trem fora de posição")
-            modo_automatico = False
-            print("Automode off: z")
+        print("Trem em posição")
+        if direction == 'R':
+            trem.go_right()
+        elif direction == 'L':
+            trem.go_left()
+        else:
+            print("direção não encontrada")
+        sensor_to.wait_for_press()
+        trem.stop()
+        print("Chegou ao destino")
+    else:
+        print("Trem fora de posição")
+    modo_automatico = False
+    print("Automode off: z")
 
 class Trem:
     def __init__(self, pin_l, pin_r):
