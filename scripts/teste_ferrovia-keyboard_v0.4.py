@@ -41,14 +41,14 @@ def __main__():
     Trem1 = Trem(3,2)
 
     Segmento1 = Segmento('q',17)
-    Segmento2 = Segmento('w',27)
-    Segmento3 = Segmento('e',22)
+    Segmento2 = Segmento('w',22)
+    Segmento3 = Segmento('e',27)
     Segmento4 = Segmento('r',4)
 
-    Desvio1 = Desvio_led('a', 13, 0, -0.75, 16, 20, 21)
-    Desvio2 = Desvio_led('s', 19, 0, -0.9, 11, 9, 10)
+    Desvio1 = Desvio_led('a', 13, 0, -0.75, 21, 20, 16)
+    Desvio2 = Desvio_led('s', 19, 0, -0.9, 10, 9, 11)
 
-    Sensor1 = Button(25, pull_up = None, active_state = True)
+    Sensor1 = Button(15, pull_up = None, active_state = True)
     Sensor2 = Button(5, pull_up = None, active_state = True)
     Sensor3 = Button(6, pull_up = None, active_state = True)
     Sensor4 = Button(26, pull_up = None, active_state = True)
@@ -192,7 +192,6 @@ class Segmento:
     def off(self):
         self.led.off()
         self.state = False
-
 
     def verificar(self):
         if  keyboard.is_pressed(self.key):
