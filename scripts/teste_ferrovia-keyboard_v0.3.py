@@ -108,7 +108,7 @@ def __main__():
 
 ## TESTAR ESSA FUNÇÃO
 def go_to(sensor_from, sensor_to, trem, direction):
-    '''sai do sensor_from e vai para o sensor_to, direction must be Trem.go_right or Trem.go_left'''
+    '''sai do sensor_from e vai para o sensor_to, direction must be "R" or "L" '''
     #TODO:
     #if type(sensor_from) != Button:
     #    return "Deve-se passar um sensor"

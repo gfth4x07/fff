@@ -46,7 +46,7 @@ def __main__():
     Segmento4 = Segmento('r',4)
 
     Desvio1 = Desvio_led('a', 13, 0, -0.75, 21, 20, 16)
-    Desvio2 = Desvio_led('s', 19, 0, -0.9, 10, 9, 11)
+    Desvio2 = Desvio_led('s', 19, 0, -0.9, 11, 9, 10)
 
     Sensor1 = Button(15, pull_up = None, active_state = True)
     Sensor2 = Button(5, pull_up = None, active_state = True)
@@ -107,6 +107,30 @@ def __main__():
             Segmento4.off()
             #Desligar ou voltar pra posição original
             break
+
+## TESTAR ESSA FUNÇÃO
+def go_to(sensor_from, sensor_to, trem, direction):
+    '''sai do sensor_from e vai para o sensor_to, direction must be "R" or "L" '''
+    #TODO:
+    #if type(sensor_from) != Button:
+    #    return "Deve-se passar um sensor"
+    #elif type(sensor_to) != Button:
+    #    return "Deve-se passar outro sensor"
+    
+    modo_automatico = True
+    if sensor_from.is_pressed and not sensor_to.is_pressed:
+                print("Trem em posição")
+                if direction == 'R':
+                    trem.go_right()
+                elif direction == 'L':
+                    trem.go_left()
+                sensor_to.wait_for_press()
+                trem.stop()
+                print("Chegou ao destino")
+            else:
+                print("Trem fora de posição")
+            modo_automatico = False
+            print("Automode off: z")
 
 class Trem:
     def __init__(self, pin_l, pin_r):
