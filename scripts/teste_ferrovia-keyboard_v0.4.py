@@ -292,7 +292,7 @@ class Desvio_led(Desvio, Led_rgb):
     
     def off(self):
        Desvio.off(self)
-       Led_rgb.red(self)
+       Led_rgb.blue(self)
 
 
 __main__()
