@@ -1,7 +1,7 @@
 from gpiozero import Button
 from time import sleep
 
-sensor = Button(26)
+sensor = Button(14)
 
 while True:
     if sensor.is_pressed:
